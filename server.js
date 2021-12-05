@@ -5,6 +5,13 @@ const bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
+app.get('/', (req, res) => {
+    return res.status(200).json({
+        '/people': 'getAllPeople | createPerson',
+        '/people/id': 'getPersonById | deletePerson | updatePerson',
+    })
+})
+
 app.get('/people', async (req, res) => {
     const people = await db.getAllPeople()
     return res.status(200).json({people})
@@ -32,4 +39,6 @@ app.delete('/people/:id' , async (req, res) => {
     return res.status(200).json({success: true})
 })
 
-app.listen(443)
+const port = 8000
+
+app.listen(process.env.PORT || port, console.log(`Listening to port ${port}`))
