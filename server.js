@@ -1,9 +1,11 @@
 const app = require('express')()
 const db = require('./people')
 const bodyParser = require('body-parser')
+const cors = require('cors')
 
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
+app.use(cors())
 
 app.get('/', (req, res) => {
     return res.status(200).json([{
