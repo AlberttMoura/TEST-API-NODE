@@ -6,10 +6,16 @@ app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
 app.get('/', (req, res) => {
-    return res.status(200).json({
+    return res.status(200).json([{
         '/people': 'getAllPeople | createPerson',
         '/people/id': 'getPersonById | deletePerson | updatePerson',
-    })
+    },
+    {
+        name: 'Cool Name',
+        age: 100,
+        country: 'Antarctica' 
+    }
+    ])
 })
 
 app.get('/people', async (req, res) => {
